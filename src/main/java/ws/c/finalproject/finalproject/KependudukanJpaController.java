@@ -11,6 +11,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
+import javax.persistence.Persistence;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import ws.c.finalproject.finalproject.exceptions.NonexistentEntityException;
@@ -25,7 +26,9 @@ public class KependudukanJpaController implements Serializable {
     public KependudukanJpaController(EntityManagerFactory emf) {
         this.emf = emf;
     }
-    private EntityManagerFactory emf = null;
+    private EntityManagerFactory emf = Persistence.createEntityManagerFactory("ws.c.finalproject_finalproject_jar_0.0.1-SNAPSHOTPU");
+    
+    public KependudukanJpaController(){}
 
     public EntityManager getEntityManager() {
         return emf.createEntityManager();
