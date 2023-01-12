@@ -6,11 +6,102 @@ and open the template in the editor.
 -->
 <html>
     <head>
-        <title>TODO supply a title</title>
+        <title>WS Kependudukan</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-        <div>TODO write content</div>
+        <div>Data Kependudukan</div>
+        <hr>
+        <script>
+            const url = "http://localhost:8080/POST";
+                        // untuk menambahkan data
+			function post(){
+				let newID = document.getElementById("myid").value;
+				let nama = document.getElementById("nama").value;
+				let nik = document.getElementById("nik").value;
+                                let alamat = document.getElementById("almaat").value;
+				let dataText = {"id":newID,"nama":nama,"nik":nik,"alamat":alamat};
+				let dataJson = JSON.stringify(dataText);
+				$.ajax({
+					url: url,
+					method: 'POST',
+					data: dataJson,
+					contentType: 'application/json',
+					dataType: 'text',
+					success: function(result){
+						console.log(result);
+					}
+				});
+			}
+                        
+                        //untuk mengedit data
+                        function put(){
+				const urlp = "http://localhost:8080/PUT";
+				let newID = document.getElementById("myid").value;
+				let nama = document.getElementById("nama").value;
+				let nik = document.getElementById("nik").value;
+                                let alamat = document.getElementById("almaat").value;
+				let dataText = {"id":newID,"nama":nama,"nik":nik,"alamat":alamat};
+				let dataJson = JSON.stringify(dataText);
+				$.ajax({
+					url: urlp,
+					method: 'PUT',
+					data: dataJson,
+					contentType: 'application/json',
+					dataType: 'text',
+					success: function(result){
+						document.getElementById("viewer").innerHTML = result;
+
+					}
+				});
+			}
+                        
+                        //untuk menampilkan data
+                        function get(){
+				const urlg = "http://localhost:8080/GET";
+				$.ajax({
+					url: urlg,
+					method: 'GET',
+					dataType: 'text',
+					success: function(result){
+						document.getElementById("viewer").innerHTML = result;
+					}
+				});
+			}
+                        
+                        //untuk menghapus data
+                        function delID(){
+				const urlg = "http://localhost:8080/DELETE";
+				let newID = document.getElementById("myid").value;
+				let nama = document.getElementById("nama").value;
+				let nik = document.getElementById("nik").value;
+                                let alamat = document.getElementById("almaat").value;
+				let dataText = {"id":newID,"nama":nama,"nik":nik,"alamat":alamat};
+				let dataJson = JSON.stringify(dataText);
+				$.ajax({
+					url: urlg,
+					method: 'DELETE',
+					data: dataJson,
+					contentType: 'application/json',
+					dataType: 'text',
+					success: function(result){
+						document.getElementById("viewer").innerHTML = result;
+					}
+				});
+			}
+        </script>
+        
+        <input type="text" id="myid" name="myid">
+	<input type="text" id="nama" name="nama">
+	<input type="text" id="nik" name="nik">
+        <input type="text" id="alamat" name="alamat">
+	<hr>
+            <button onclick="get()">Get The Data from Web Server</button><br>
+            <button onclick="post()">Send The Data to Web Server</button><br>
+            <button onclick="put()">Edit The Data of Web Server</button><br>
+            <button onclick="delID()">Delete The Data of Web Server</button>
+	<hr>
+	<div id="viewer"></div>
     </body>
 </html>
