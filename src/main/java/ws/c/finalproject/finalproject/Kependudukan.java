@@ -18,7 +18,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author USER DJOGJA
+ * @author AULIANA
  */
 @Entity
 @Table(catalog = "finalproject", schema = "")
